@@ -173,7 +173,7 @@ namespace Arcade_app
                 Console.WriteLine("=======================================================================================================================");
 
                 // Choosing from menu
-                Console.WriteLine("Menu:");
+                Console.WriteLine("\nMenu:");
                 foreach (Menu option in Enum.GetValues(typeof(Menu)))
                 {
                     Console.WriteLine($"{(int)option}. {option.ToString().Replace('_', ' ')}");

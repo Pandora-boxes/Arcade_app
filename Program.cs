@@ -132,7 +132,8 @@ namespace Arcade_app
                 applicantDataArrEtry.Add(applicantData);                                            //adds the combined string into the next entry of the list to be written into the txt file
                 Console.WriteLine("Do you still want to add anymore applicants? Y for yes and N for no");
                 string choice = Console.ReadLine();
-                if (choice == "N")
+                string choiceUpper = choice.ToUpper();
+                if (choiceUpper == "N")
                     enter = false;
                 File.WriteAllLines(filepath, applicantDataArrEtry);
                 Console.Clear();
@@ -151,6 +152,21 @@ namespace Arcade_app
 
         static void Main(string[] args)
         {
+            string filePath = Directory.GetCurrentDirectory();
+            List<string> filepatharr = new List<string>(filePath.Split('\\'));
+
+            for (int i = 0; i < filepatharr.Count;i++)
+            {
+                if (filepatharr[i] == ("Arcade_app"))
+                {
+                    filepatharr[i + 1] = "ApplicantData.txt";
+                    filepatharr.Remove("Debug");
+                    break;
+                }
+
+            }
+
+            filePath = string.Join("\\", filepatharr);
             // Perpetual loop to keep program running unless choosing exit
             while (true)
             {
@@ -171,32 +187,20 @@ namespace Arcade_app
                 //Exiting program
                 if (optionChosen == Menu.Exit)
                 {
+                    Environment.Exit(0);
                     break;
                 }
 
                 // Switch case to use the menu option chosen
-            }
-
-
-            string filePath = Directory.GetCurrentDirectory();
-            List<string> filepatharr = new List<string>(filePath.Split('\\'));
-
-            Console.WriteLine(filePath);
-
-            for (int i = 0; i < filepatharr.Count;i++)
-            {
-                if (filepatharr[i] == ("Arcade_app"))
+                switch (optionChosen)
                 {
-                    filepatharr[i + 1] = "ApplicantData.txt";
-                    filepatharr.Remove("Debug");
-                    break;
+                    case Menu.CaptureDetails:
+                        ApplicantDataEntry(filePath);
+                        break;
+                    case Menu.CheckTokenQualification:
+                        break;
                 }
-
             }
-
-            filePath = string.Join("\\", filepatharr);
-
-            Console.ReadKey();
         }
     }
 }

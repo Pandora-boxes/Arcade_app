@@ -41,7 +41,7 @@ namespace Arcade_app
                     formatCorrect = int.TryParse(applicantAge, out int Age);            //A tryParse into a throwaway variable like age to
                                                                                         //check if the string can be properly formatted into it's intended data type
                     if (formatCorrect == false)
-                        Console.WriteLine("\nThe format is wrong you need to write an age.Try again.");
+                        Console.WriteLine("\nThe format is wrong you need to write an age. Try again.");
                     else if (formatCorrect == true)
                         applicantDataArr.Add(applicantAge);
                         
@@ -170,7 +170,7 @@ namespace Arcade_app
             // Perpetual loop to keep program running unless choosing exit
             while (true)
             {
-                Console.Write("========================================================================================================================");
+                Console.WriteLine("=======================================================================================================================");
 
                 // Choosing from menu
                 Console.WriteLine("Menu:");
@@ -192,7 +192,7 @@ namespace Arcade_app
                     Environment.Exit(0);
                 }
 
-                Console.WriteLine("========================================================================================================================");
+                Console.WriteLine("=======================================================================================================================");
 
                 // Switch case to use the menu option chosen
                 switch (optionChosen)

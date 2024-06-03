@@ -141,8 +141,43 @@ namespace Arcade_app
             
         }
 
+        // Menu creation
+        enum Menu
+        {
+            CaptureDetails = 1,
+            CheckTokenQualification,
+            Exit
+        }
+
         static void Main(string[] args)
         {
+            // Perpetual loop to keep program running unless choosing exit
+            while (true)
+            {
+                // Choosing from menu
+                Console.WriteLine("What would you like to do?" +
+                    "\nType the corrosponding number" +
+                    "\n1: Capture details" +
+                    "\n2: See customer token qualification" +
+                    "\n3: Exit program");
+
+                // Making sure user input is valid
+                if (!Enum.TryParse(Console.ReadLine(), out Menu optionChosen) || !Enum.IsDefined(typeof(Menu), optionChosen))
+                {
+                    Console.WriteLine("Invalid option, try again");
+                    continue;
+                }
+
+                //Exiting program
+                if (optionChosen == Menu.Exit)
+                {
+                    break;
+                }
+
+                // Switch case to use the menu option chosen
+            }
+
+
             string filePath = Directory.GetCurrentDirectory();
             List<string> filepatharr = new List<string>(filePath.Split('\\'));
 

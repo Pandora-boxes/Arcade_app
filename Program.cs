@@ -7,6 +7,7 @@ using System.IO;
 
 namespace Arcade_app
 {
+
     internal class Program
     {
         static void ApplicantDataEntry(string filepath)                             //This is the Method of etering the new applicant data into a .txt file
@@ -189,6 +190,8 @@ namespace Arcade_app
                 //Exiting program
                 if (optionChosen == Menu.Exit_the_program)
                 {
+                    Console.WriteLine("Thank you, have a nice day");
+                    System.Threading.Thread.Sleep(2000);
                     Environment.Exit(0);
                 }
 

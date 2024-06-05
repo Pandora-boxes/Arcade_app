@@ -413,7 +413,7 @@ namespace Arcade_app
                                 }
                                 continue;
                             case SubMenu.View_the_score_of_a_customer:
-                                ScoreCheck(applicantDataArr);
+                                Console.WriteLine(ScoreCheck(applicantDataArr)); 
                                 continue;
                             case SubMenu.Return_to_menu:
                                 break;

@@ -219,7 +219,7 @@ namespace Arcade_app
                 }
 
                 formatCorrect = false;
-                Console.WriteLine("\nWhat is the applicant's start date?: mm/dd/yyyy");
+                Console.WriteLine("\nWhat is the applicant's start date?: mm/dd/yyyy");     
                 while (formatCorrect == false)
                 {
                     applicantStartDate = Console.ReadLine();
@@ -243,11 +243,13 @@ namespace Arcade_app
                     {
                         employ = "false";
                         applicantDataArr.Add(employ);
+                        formatCorrect = true;
                     }
                     else if (applicantEmploy == "Y") 
                     {
                         employ = "true";
                         applicantDataArr.Add(employ);
+                        formatCorrect = true;
                     }
                     else
                     {
@@ -331,12 +333,12 @@ namespace Arcade_app
 
         static void Main(string[] args)
         {
-            string filePath = Directory.GetCurrentDirectory();
-            List<string> filepatharr = new List<string>(filePath.Split('\\'));
+            string filePath = Directory.GetCurrentDirectory();                          //gets the directory of the running file and puts it into filepath as a string
+            List<string> filepatharr = new List<string>(filePath.Split('\\'));          //makes filepath into a list since the directory could be any length
 
-            for (int i = 0; i < filepatharr.Count;i++)
+            for (int i = 0; i < filepatharr.Count;i++)                                  //runs through the filepath array to edit the cells 
             {
-                if (filepatharr[i] == ("Arcade_app"))
+                if (filepatharr[i] == ("Arcade_app"))                                   //checks 
                 {
                     filepatharr[i + 1] = "ApplicantData.txt";
                     filepatharr.Remove("Debug");

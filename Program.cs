@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
 
+//Fourie Jooste       (602075)
+//Pandora Greyling   (602369)
+//Matthew Bisset      (602166)
+
 namespace Arcade_app
 {
 
@@ -146,21 +150,6 @@ namespace Arcade_app
                 {
                     failed.Add(successfulApp);
                 }
-
-                // dont need with what Pandora has done
-
-
-                // failed counterpart
-
-                string failedApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
-                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
-                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
-                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
-                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
-                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
-                failed.Add(failedApp);
-
-
             }
 
 

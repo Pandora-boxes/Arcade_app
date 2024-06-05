@@ -63,7 +63,7 @@ namespace Arcade_app
         }
         static void Reader(List<string> applicantDataArr, List<string> successful , List<string> failed )
         {
-            Console.WriteLine(DateTime.Now.ToString());
+            Console.Clear();
 
             string name;
             int age;
@@ -99,6 +99,13 @@ namespace Arcade_app
 
                 avgScore = (bowlingHS + highScoreRank) / 2;
                 int loyalCustomerMonths = MonthCalc(startDateAsLoyalCustomer, today);
+                string successfulApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
+                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
+                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
+                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
+                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
+                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
+
 
 
                 //condition cheacks
@@ -131,18 +138,11 @@ namespace Arcade_app
                 }
                 if (applicationApproved == true)
                 {
-
-
-                    string successfulApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
-                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
-                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
-                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
-                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
-                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
-
                     successful.Add(successfulApp);
-
-
+                }
+                else
+                {
+                    failed.Add(successfulApp);
                 }
 
                 // dont need with what Pandora has done
@@ -300,7 +300,7 @@ namespace Arcade_app
                 applicantData = string.Join(",", applicantDataArr);                                 //This makes the Entered data into a combined string with a "," seperating them
 
                 applicantDataEtry.Add(applicantData);                                            //adds the combined string into the next entry of the list to be written into the txt file
-                Console.WriteLine("\nDo you still want to add anymore applicants? Y for yes and N for no");
+                Console.WriteLine("\nDo you still want to add anymore applicants? (Y/N)");
                 string choice = Console.ReadLine();
                 string choiceUpper = choice.ToUpper();
                 if (choiceUpper == "N")
@@ -325,7 +325,8 @@ namespace Arcade_app
             View_loyal_customers_that_are_eligable_for_credit = 1,
             View_loyal_customers_that_are_ineligabe_for_credit,
             View_the_score_of_a_customer,
-            Return_to_menu
+            Return_to_main_menu,
+            Exit_the_program
         }
 
         static void Main(string[] args)
@@ -433,10 +434,14 @@ namespace Arcade_app
                                 case SubMenu.View_the_score_of_a_customer:
                                     Console.WriteLine(ScoreCheck(applicantDataArr));
                                     continue;
-                                case SubMenu.Return_to_menu:
+                                case SubMenu.Return_to_main_menu:
                                     subMenuBool = false;
                                     break;
-
+                                case SubMenu.Exit_the_program:
+                                    Console.WriteLine("Thank you, have a nice day");
+                                    System.Threading.Thread.Sleep(2000);
+                                    Environment.Exit(0);
+                                    break;
                             }
                          
                         }

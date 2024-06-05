@@ -387,41 +387,47 @@ namespace Arcade_app
                     case Menu.View_token_eligibility:
                         Console.WriteLine("\nView token eligibility");
 
-                        foreach (SubMenu option in Enum.GetValues(typeof(SubMenu)))
-                        {
-                            Console.WriteLine($"{(int)option}. {option.ToString().Replace('_', ' ')}");
-                        }
+                        bool subMenuBool = true;
 
-                        // Making sure user input is valid
-                        if (!Enum.TryParse(Console.ReadLine(), out SubMenu subMenuOptionChosen) || !Enum.IsDefined(typeof(SubMenu), subMenuOptionChosen))
+                        while (subMenuBool == true)
                         {
-                            Console.WriteLine("Invalid option, try again");
-                            continue;
-                        }
-                        switch (subMenuOptionChosen)
-                        {
-                            case SubMenu.View_loyal_customers_that_are_eligable_for_credit:
-                                foreach (string line in successful)
-                                {
-                                    Console.WriteLine(line);
-                                }
-                                continue;
-                            case SubMenu.View_loyal_customers_that_are_ineligabe_for_credit:
-                                foreach (string line in failed)
-                                {
-                                    Console.WriteLine(line);
-                                }
-                                continue;
-                            case SubMenu.View_the_score_of_a_customer:
-                                Console.WriteLine(ScoreCheck(applicantDataArr)); 
-                                continue;
-                            case SubMenu.Return_to_menu:
-                                break;
 
+                            foreach (SubMenu option in Enum.GetValues(typeof(SubMenu)))
+                            {
+                                Console.WriteLine($"{(int)option}. {option.ToString().Replace('_', ' ')}");
+                            }
+
+                            // Making sure user input is valid
+                            if (!Enum.TryParse(Console.ReadLine(), out SubMenu subMenuOptionChosen) || !Enum.IsDefined(typeof(SubMenu), subMenuOptionChosen))
+                            {
+                                Console.WriteLine("Invalid option, try again");
+                                continue;
+                            }
+                            switch (subMenuOptionChosen)
+                            {
+                                case SubMenu.View_loyal_customers_that_are_eligable_for_credit:
+                                    foreach (string line in successful)
+                                    {
+                                        Console.WriteLine(line);
+                                    }
+                                    continue;
+                                case SubMenu.View_loyal_customers_that_are_ineligabe_for_credit:
+                                    foreach (string line in failed)
+                                    {
+                                        Console.WriteLine(line);
+                                    }
+                                    continue;
+                                case SubMenu.View_the_score_of_a_customer:
+                                    Console.WriteLine(ScoreCheck(applicantDataArr));
+                                    continue;
+                                case SubMenu.Return_to_menu:
+                                    subMenuBool = false;
+                                    break;
+
+                            }
+                         
                         }
                         break;
-                        
-                    
                 }
             }
         }

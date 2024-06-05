@@ -63,7 +63,7 @@ namespace Arcade_app
         }
         static void Reader(List<string> applicantDataArr, List<string> successful , List<string> failed )
         {
-            Console.WriteLine(DateTime.Now.ToString());
+            Console.Clear();
 
             string name;
             int age;
@@ -99,6 +99,13 @@ namespace Arcade_app
 
                 avgScore = (bowlingHS + highScoreRank) / 2;
                 int loyalCustomerMonths = MonthCalc(startDateAsLoyalCustomer, today);
+                string successfulApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
+                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
+                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
+                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
+                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
+                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
+
 
 
                 //condition cheacks
@@ -131,18 +138,11 @@ namespace Arcade_app
                 }
                 if (applicationApproved == true)
                 {
-
-
-                    string successfulApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
-                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
-                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
-                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
-                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
-                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
-
                     successful.Add(successfulApp);
-
-
+                }
+                else
+                {
+                    failed.Add(successfulApp);
                 }
 
                 // dont need with what Pandora has done

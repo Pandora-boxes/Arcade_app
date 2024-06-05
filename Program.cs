@@ -233,15 +233,27 @@ namespace Arcade_app
                 formatCorrect = false;
                 Console.WriteLine("\nWhat is the applicant's employment status?" +
                     " If the applicant is under 18 then use the parents employment status." +
-                    "\nWrite true for employed or false for unemployed");
+                    "\nY/N");
+                string employ;
                 while (formatCorrect == false)
                 {
                     applicantEmploy = Console.ReadLine();
-                    formatCorrect = bool.TryParse(applicantEmploy, out bool Employ);
-                    if (formatCorrect == false)
-                        Console.WriteLine("\nThe format is wrong you need to write true or false.");
-                    else if (formatCorrect == true)
-                        applicantDataArr.Add(applicantEmploy);
+                    applicantEmploy = applicantEmploy.ToUpper();
+                    if (applicantEmploy == "N")
+                    {
+                        employ = "false";
+                        applicantDataArr.Add(employ);
+                    }
+                    else if (applicantEmploy == "Y") 
+                    {
+                        employ = "true";
+                        applicantDataArr.Add(employ);
+                    }
+                    else
+                    {
+                        Console.WriteLine("The format is wrong you need to write Y or N\nTry again:");
+                    }
+                
                 }
 
                 Console.WriteLine("\nWhat is the applicant's favorite slush-puppy flavor?");

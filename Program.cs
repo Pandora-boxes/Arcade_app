@@ -12,7 +12,7 @@ namespace Arcade_app
     internal class Program
     {
 
-        static int MonthCalc(string startdate, DateTime now)
+        static int MonthCalc(string startdate, DateTime now)                
         {
             string tempstringNow = DateTime.Now.ToString();
             string[] nowArray = tempstringNow.Split('/', ' ');
@@ -149,6 +149,15 @@ namespace Arcade_app
 
 
                 // failed counterpart
+
+                string failedApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
+                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
+                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
+                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
+                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
+                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
+                failed.Add(failedApp);
+
 
             }
 
@@ -373,7 +382,14 @@ namespace Arcade_app
                 if (optionChosen == Menu.Exit_the_program)
                 {
                     Console.Clear();
-                    Console.WriteLine("Thank you, have a nice day");
+                    Console.WriteLine("Thank you, have a nice day\n\n");
+                    Console.WriteLine(@"
+       /\_/\        (crust)
+     =( ^ . ^ )=        (cheese) 
+      /  =  =  \        (toppings)
+     /  / \ \ \  \  (crust)    
+    /_/   \_/   \_\ 
+");
                     System.Threading.Thread.Sleep(2000);
                     Environment.Exit(0);
                 }
@@ -395,7 +411,7 @@ namespace Arcade_app
 
                         while (subMenuBool == true)
                         {
-
+                            //Displaying Sub Menu
                             Console.WriteLine("Menu\nChoose a option:\n");
                             foreach (SubMenu option in Enum.GetValues(typeof(SubMenu)))
                             {
@@ -408,16 +424,14 @@ namespace Arcade_app
                                 Console.WriteLine("Invalid option, try again");
                                 continue;
                             }
+
+                            //Switch for sub menu
                             switch (subMenuOptionChosen)
                             {
                                 case SubMenu.View_loyal_customers_that_are_eligable_for_credit:
                                     Console.Clear();
                                     foreach (string line in successful)
                                     {
-                                        if(line == null)
-                                        {
-                                            Console.WriteLine("there are no customers eligible for credit.");
-                                        }
                                         Console.WriteLine(line);
                                     }
                                     continue;
@@ -438,7 +452,14 @@ namespace Arcade_app
                                     break;
                                 case SubMenu.Exit_the_program:
                                     Console.Clear();
-                                    Console.WriteLine("Thank you, have a nice day");
+                                    Console.WriteLine("Thank you, have a nice day\n\n");
+                                    Console.WriteLine(@"
+       /\_/\        (crust)
+     =( ^ . ^ )=        (cheese) 
+      /  =  =  \        (toppings)
+     /  / \ \ \  \  (crust)    
+    /_/   \_/   \_\ 
+");
                                     System.Threading.Thread.Sleep(2000);
                                     Environment.Exit(0);
                                     break;

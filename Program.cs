@@ -11,7 +11,7 @@ namespace Arcade_app
 
     internal class Program
     {
-        /* 
+         
             static int MonthCalc(string startdate, DateTime now)
         {
             string tempstringNow = DateTime.Now.ToString();
@@ -31,7 +31,7 @@ namespace Arcade_app
         static string ScoreCheck(string[] ApplArr,string searchCustomerName, int searchCustomerAge, int menuNum, int avgHS)
         {   if(menuNum= 3)
             { 
-                Console.WriteLine("Waht is the customer's name?:");
+                Console.WriteLine("What is the customer's name?:");
                 searchCustomerName = Console.ReadLine();
                 Console.WriteLine("How old is the Customer?:");
                 searchCustomerAge = (int)Console.ReadLine();
@@ -45,10 +45,11 @@ namespace Arcade_app
                     "\n" + $"Your current bowling high score is: {ApplArr[5]}" +
                     "\n=======================================" +
                     "\n" + $"Your average high score is: {avgHS}";
-                    Console.WriteLine(display);
+                    return Console.WriteLine(display);
                 }
             }
         }
+        /*
         static string Reader(string filepath)
         {
             Console.WriteLine(DateTime.Now.ToString());

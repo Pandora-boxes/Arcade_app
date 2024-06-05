@@ -99,11 +99,11 @@ namespace Arcade_app
 
                 avgScore = (bowlingHS + highScoreRank) / 2;
                 int loyalCustomerMonths = MonthCalc(startDateAsLoyalCustomer, today);
-                string successfulApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
-                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
+                string successfulApp = "name: " + name + "\n" + "age: " + age.ToString() + "\n" +  " high score rank: " +
+                    highScoreRank.ToString() + "\n" +"Bowling high score: " + bowlingHS.ToString() + "\n" + "Average score: " + avgScore.ToString() + "\n" +
                     "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
-                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
-                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
+                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() + "\n" +
+                    "Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
                     "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
 
 

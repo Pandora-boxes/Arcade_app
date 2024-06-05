@@ -150,15 +150,6 @@ namespace Arcade_app
 
                 // failed counterpart
 
-                string failedApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
-                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
-                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
-                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
-                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
-                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
-                failed.Add(failedApp);
-
-
             }
 
 
@@ -423,6 +414,10 @@ namespace Arcade_app
                                     Console.Clear();
                                     foreach (string line in successful)
                                     {
+                                        if(line == null)
+                                        {
+                                            Console.WriteLine("there are no customers eligible for credit.");
+                                        }
                                         Console.WriteLine(line);
                                     }
                                     continue;

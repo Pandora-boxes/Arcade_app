@@ -12,7 +12,7 @@ namespace Arcade_app
     internal class Program
     {
 
-        static int MonthCalc(string startdate, DateTime now)                
+        static int MonthCalc(string startdate, DateTime now)          // calculating the total monthes      
         {
             string tempstringNow = DateTime.Now.ToString();
             string[] nowArray = tempstringNow.Split('/', ' ');
@@ -28,7 +28,7 @@ namespace Arcade_app
             int totalMonths = yearToMonth + monthDiff;
             return totalMonths;
         }
-        static string ScoreCheck( List<string> ApplArr)
+        static string ScoreCheck( List<string> ApplArr)     // Searching for a specific person
         {
             int searchCustomerAge;
             string searchCustomerName;
@@ -62,6 +62,8 @@ namespace Arcade_app
             return "Either the name and/or age in incorrect or the customer is not registered";
         }
         static void Reader(List<string> applicantDataArr, List<string> successful , List<string> failed )
+
+            //method for all the condition checks
         {
             Console.Clear();
 

@@ -288,7 +288,7 @@ namespace Arcade_app
                 applicantData = string.Join(",", applicantDataArr);                                 //This makes the Entered data into a combined string with a "," seperating them
 
                 applicantDataEtry.Add(applicantData);                                            //adds the combined string into the next entry of the list to be written into the txt file
-                Console.WriteLine("\nDo you still want to add anymore applicants? Y for yes and N for no");
+                Console.WriteLine("\nDo you still want to add anymore applicants? (Y/N)");
                 string choice = Console.ReadLine();
                 string choiceUpper = choice.ToUpper();
                 if (choiceUpper == "N")
@@ -313,7 +313,8 @@ namespace Arcade_app
             View_loyal_customers_that_are_eligable_for_credit = 1,
             View_loyal_customers_that_are_ineligabe_for_credit,
             View_the_score_of_a_customer,
-            Return_to_menu
+            Return_to_main_menu,
+            Exit_the_program
         }
 
         static void Main(string[] args)
@@ -421,10 +422,14 @@ namespace Arcade_app
                                 case SubMenu.View_the_score_of_a_customer:
                                     Console.WriteLine(ScoreCheck(applicantDataArr));
                                     continue;
-                                case SubMenu.Return_to_menu:
+                                case SubMenu.Return_to_main_menu:
                                     subMenuBool = false;
                                     break;
-
+                                case SubMenu.Exit_the_program:
+                                    Console.WriteLine("Thank you, have a nice day");
+                                    System.Threading.Thread.Sleep(2000);
+                                    Environment.Exit(0);
+                                    break;
                             }
                          
                         }

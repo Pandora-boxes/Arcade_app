@@ -47,8 +47,9 @@ namespace Arcade_app
                 return "Either the name and/or age in incorrect or the customer is not registered";
             }
         }
-        static string Reader(string filepath)
+        static string Reader(List<string> applicantDataArr, List<string> successful , List<string> failed )
         {
+            Console.WriteLine(DateTime.Now.ToString());
 
             string name;
             int age;
@@ -66,10 +67,12 @@ namespace Arcade_app
             string successOutput = "Customers that qualify for Credit:";
             DateTime today = DateTime.Now;
 
-
-            while (filepath != null)
+            foreach (string line in applicantDataArr)
             {
-                tempArray = filepath.Split(',');
+
+
+
+                tempArray = line.Split(',');
 
                 name = tempArray[0];
                 age = int.Parse(tempArray[1]);
@@ -128,6 +131,7 @@ namespace Arcade_app
 
                 }
 
+                // dont need with what Pandora has done
 
 
                 // failed counterpart
@@ -148,8 +152,10 @@ namespace Arcade_app
 
 
             return "the text file is empty";
+
+
         }
-        
+
 
 
         static void ApplicantDataEntry(string filepath)                             //This is the Method of etering the new applicant data into a .txt file
@@ -310,6 +316,8 @@ namespace Arcade_app
             }
 
             filePath = string.Join("\\", filepatharr);
+            List<string>successful = new List<string>();
+            List<string>failed = new List<string>();
             // Perpetual loop to keep program running unless choosing exit
             while (true)
             {

@@ -10,21 +10,15 @@ namespace Arcade_app
 
     internal class Program
     {
-        static void ApplicantDataEntry(string filepath)                             //This is the Method of etering the new applicant data into a .txt file
+        static List<string> ApplicantDataEntry(string filepath, List<string> applicantDataArrEtry)                             //This is the Method of etering the new applicant data into a .txt file
         {
             string applicantName, applicantAge, applicantHighScoreRank, applicantStartDate, applicantPizzaTotal,
                 applicantBowlHighScore, applicantEmploy, applicantSlushPuppyPref, applicantSlushPuppyTotal; 
 
             string applicantData;
             List<string> applicantDataArr = new List<string>();                     //list to hold the data as its being entered
-            List<string> applicantDataArrEtry = new List<string>();                 //list to hold all the data from the txt file and the properly formatted new data
             bool formatCorrect=false;
             bool enter = true;
-
-            foreach (string line in File.ReadAllLines(filepath))
-            {
-                applicantDataArrEtry.Add(line);                                        //to get all data already in the txt file into the applicantDataArrEtry list
-            }
                                                                                           //a do while loop to contain the user so that if they want to repeat the data
                                                                                         //entry then they can with a simple bool loop
             do
@@ -45,7 +39,6 @@ namespace Arcade_app
                         Console.WriteLine("\nThe format is wrong you need to write an age. Try again.");
                     else if (formatCorrect == true)
                         applicantDataArr.Add(applicantAge);
-                        
                 }                                                                       //all of these while loops are for format checking
                                                                                         //so that if the user gets the data format wrong they can redo the data entry
 
@@ -136,11 +129,16 @@ namespace Arcade_app
                 string choiceUpper = choice.ToUpper();
                 if (choiceUpper == "N")
                     enter = false;
-                File.WriteAllLines(filepath, applicantDataArrEtry);
                 Console.Clear();
 
             } while (enter == true);
-            
+
+            foreach (string line in applicantDataArrEtry)
+            {
+                Console.WriteLine(line);
+            }
+            File.WriteAllLines(filepath, applicantDataArrEtry);
+            return applicantDataArrEtry;
         }
 
         // Menu creation
@@ -168,6 +166,14 @@ namespace Arcade_app
             }
 
             filePath = string.Join("\\", filepatharr);
+
+            List<string> applicantDataArr = new List<string>();                 //list to hold all the data from the txt file and the properly formatted new data
+            foreach (string line in File.ReadAllLines(filePath))
+            {
+                Console.WriteLine(line);
+                applicantDataArr.Add(line);                                        //to get all data already in the txt file into the applicantDataArrEtry list
+            }
+
             // Perpetual loop to keep program running unless choosing exit
             while (true)
             {
@@ -201,7 +207,7 @@ namespace Arcade_app
                 switch (optionChosen)
                 {
                     case Menu.Capture_details:
-                        ApplicantDataEntry(filePath);
+                        applicantDataArr = ApplicantDataEntry(filePath, applicantDataArr);
                         break;
                     case Menu.View_token_eligibility:
                         break;

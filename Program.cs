@@ -169,7 +169,7 @@ namespace Arcade_app
 
 
 
-        static void ApplicantDataEntry(string filepath, List<string> applicantDataEtry)                             //This is the Method of etering the new applicant data into a .txt file
+        static void ApplicantDataEntry(string filepath, List<string> applicantDataEtry)               //This is the Method of etering the new applicant data into a .txt file
         {
             string applicantName, applicantAge, applicantHighScoreRank, applicantStartDate, applicantPizzaTotal,
                 applicantBowlHighScore, applicantEmploy, applicantSlushPuppyPref, applicantSlushPuppyTotal; 
@@ -311,7 +311,7 @@ namespace Arcade_app
                 
 
             } while (enter == true);
-            File.WriteAllLines(filepath, applicantDataEtry);
+            File.WriteAllLines(filepath, applicantDataEtry);                                    //writes the applicants in the array and recently added into the file
         }
         
 
@@ -336,23 +336,23 @@ namespace Arcade_app
             string filePath = Directory.GetCurrentDirectory();                          //gets the directory of the running file and puts it into filepath as a string
             List<string> filepatharr = new List<string>(filePath.Split('\\'));          //makes filepath into a list since the directory could be any length
 
-            for (int i = 0; i < filepatharr.Count;i++)                                  //runs through the filepath array to edit the cells 
-            {
-                if (filepatharr[i] == ("Arcade_app"))                                   //checks 
+            for (int i = 0; i < filepatharr.Count;i++)                                  //runs through the filepath array to edit the cells
+            {                                                                           //to make it properly point to the file
+                if (filepatharr[i] == "Arcade_app")                                     //checks for the start of the Arcade_App file
                 {
-                    filepatharr[i + 1] = "ApplicantData.txt";
-                    filepatharr.Remove("Debug");
+                    filepatharr[i + 1] = "ApplicantData.txt";                           //changes the next cell after the start to the file name
+                    filepatharr.Remove("Debug");                                        //removes the debug from the 
                     break;
                 }
 
             }
 
-            filePath = string.Join("\\", filepatharr);
-            List<string> applicantDataArr = new List<string>();
+            filePath = string.Join("\\", filepatharr);                                  //joins the file path array back into a string amking it accessable by functions
+            List<string> applicantDataArr = new List<string>();                         //array for storing the values in the txt file
 
-            foreach (string line in File.ReadAllLines(filePath))
+            foreach (string line in File.ReadAllLines(filePath))                        //runs through each line of the array and puts it into a array
             {
-                applicantDataArr.Add(line);                                        //to get all data already in the txt file into the applicantDataArrEtry list
+                applicantDataArr.Add(line);                                             //to get all data already in the txt file into the applicantDataArrEtry list
             }
 
             List<string>successful = new List<string>();

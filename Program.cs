@@ -185,6 +185,7 @@ namespace Arcade_app
                                                                                         //entry then they can with a simple bool loop
             do
             {
+                Console.Clear();
                 applicantDataArr.Clear();
                 Console.WriteLine("What is the applicant's name?");
                 applicantName = Console.ReadLine();
@@ -293,7 +294,7 @@ namespace Arcade_app
                 if (choiceUpper == "N")
                     enter = false;
                 
-                Console.Clear();
+                
 
             } while (enter == true);
             File.WriteAllLines(filepath, applicantDataEtry);

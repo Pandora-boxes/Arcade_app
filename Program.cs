@@ -11,8 +11,8 @@ namespace Arcade_app
 
     internal class Program
     {
-         
-            static int MonthCalc(string startdate, DateTime now)
+
+        static int MonthCalc(string startdate, DateTime now)
         {
             string tempstringNow = DateTime.Now.ToString();
             string[] nowArray = tempstringNow.Split('/', ' ');
@@ -21,35 +21,32 @@ namespace Arcade_app
             int monthNow = int.Parse(nowArray[1]);
             int monthStart = int.Parse(joinArray[0]);
             int yearNow = int.Parse(nowArray[0]);
-            int yearStart = int.Parse(joinArray[2]);
+            int yearStart = int.Parse(joinArray[3]);
             int yearDiff = yearNow - yearStart;
             int monthDiff = monthStart - monthStart;
             int yearToMonth = yearDiff * 12;
             int totalMonths = yearToMonth + monthDiff;
             return totalMonths;
         }
-        static string ScoreCheck(string[] ApplArr,string searchCustomerName, int searchCustomerAge, int menuNum, int avgHS)
-        {   if(menuNum= 3)
-            { 
-                Console.WriteLine("What is the customer's name?:");
-                searchCustomerName = Console.ReadLine();
-                Console.WriteLine("How old is the Customer?:");
-                searchCustomerAge = (int)Console.ReadLine();
-                
-                if (ApplArr[0].ToLower() == searchCustomerName.ToLower(). && ApplArr[1] == searchCustomerAge)
-                {
-                    string display = $"name: {searchCustomerName}" +
-                    "\n" + $"Age: {searchCustomerAge}" +
-                    "\n" + $"Your current high score rank: {ApplArr[2]}" +
-                    "\n " + "=======================================" +
-                    "\n" + $"Your current bowling high score is: {ApplArr[5]}" +
-                    "\n=======================================" +
-                    "\n" + $"Your average high score is: {avgHS}";
-                    return Console.WriteLine(display);
-                }
+        static string ScoreCheck(int searchCustomerAge, string searchCustomerName, string[] ApplArr, int avgHS)
+        {
+
+            if (ApplArr[0].ToLower() == searchCustomerName.ToLower() && int.Parse(ApplArr[1]) == searchCustomerAge)
+            {
+                string display = $"name: {searchCustomerName}" +
+                "\n" + $"Age: {searchCustomerAge}" +
+                "\n" + $"Your current high score rank: {ApplArr[2]}" +
+                "\n " + "=======================================" +
+                "\n" + $"Your current bowling high score is: {ApplArr[5]}" +
+                "\n=======================================" +
+                "\n" + $"Your average high score is: {avgHS}";
+                return display;
+            }
+            else
+            {
+                return "Either the name and/or age in incorrect or the customer is not registered";
             }
         }
-        /*
         static string Reader(string filepath)
         {
             Console.WriteLine(DateTime.Now.ToString());
@@ -65,16 +62,15 @@ namespace Arcade_app
             int numOfSlushiesSinceFirstVisit;
             int avgScore;
             string[] tempArray;
-            int qualiForCredCount = 0;
-            string[] credArr;
+            List<string> tempList = new List<string>();
             bool applicationApproved = true;
+            string successOutput = "Customers that qualify for Credit:";
             DateTime today = DateTime.Now;
 
 
-            while (tepExistingApplicant != null)
+            while (filepath != null)
             {
-                string tepExistingApplicant; 
-                tempArray = tepExistingApplicant.Split(',');
+                tempArray = filepath.Split(',');
 
                 name = tempArray[0];
                 age = int.Parse(tempArray[1]);
@@ -85,11 +81,10 @@ namespace Arcade_app
                 isEmployed = bool.Parse(tempArray[6]);
                 favoriteSlushieFlavour = tempArray[7];
                 numOfSlushiesSinceFirstVisit = int.Parse(tempArray[8]);
-                avgScore = bowlingHS + highScoreRank /2
-                j++;
+                avgScore = (bowlingHS + highScoreRank) / 2;
                 int loyalCustomerMonths = MonthCalc(startDateAsLoyalCustomer, today);
 
-                
+
                 //condition cheacks
                 if (isEmployed == false)
                 {
@@ -120,26 +115,21 @@ namespace Arcade_app
                 }
                 if (applicationApproved == true)
                 {
-                    string[] tempOutputArr = "name: "name + " age: " + age + " high score rank: " + highScoreRank + "\n" +
-                        "Bowling high score: " + bowlingHS + " Average score: " + avgScore + "\n" +
-                        "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n"
-                        "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit +
-                        " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit + "\n" +
-                        "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
 
-                    credArr[qualiForCredCount] = tempOutputArr;
-                    qualiForCredCount++;
-                    
-                    
-                    // dont need with what Pandora has done
-                
+
+                    string successfulApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
+                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
+                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
+                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
+                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
+                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
+
+                    tempList.Add(successOutput);
+
 
                 }
             }
-
         }
-    }
-}
 */
 
         static void ApplicantDataEntry(string filepath)                             //This is the Method of etering the new applicant data into a .txt file

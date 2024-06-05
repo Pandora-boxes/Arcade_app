@@ -49,7 +49,6 @@ namespace Arcade_app
         }
         static string Reader(string filepath)
         {
-            Console.WriteLine(DateTime.Now.ToString());
 
             string name;
             int age;
@@ -128,9 +127,30 @@ namespace Arcade_app
 
 
                 }
+
+
+
+                // failed counterpart
+
+
+
+                // if you want to search for an applicant
+
+                int searchCustomerAge;
+                string searchCustomerName;
+                Console.WriteLine("What is the customer's name?:");
+                searchCustomerName = Console.ReadLine();
+                Console.WriteLine("How old is the Customer?:");
+                searchCustomerAge = int.Parse(Console.ReadLine());
+                Console.Write(ScoreCheck(searchCustomerAge, searchCustomerName, tempArray, avgScore));
+
             }
+
+
+            return "the text file is empty";
         }
-*/
+        
+
 
         static void ApplicantDataEntry(string filepath)                             //This is the Method of etering the new applicant data into a .txt file
         {

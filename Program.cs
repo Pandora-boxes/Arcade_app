@@ -28,10 +28,21 @@ namespace Arcade_app
             int totalMonths = yearToMonth + monthDiff;
             return totalMonths;
         }
-        static string ScoreCheck(int searchCustomerAge, string searchCustomerName, string[] ApplArr, int avgHS)
+        static string ScoreCheck( List<string> ApplArr)
         {
+            int searchCustomerAge;
+            string searchCustomerName;
+            Console.WriteLine("What is the customer's name?:");
+            searchCustomerName = Console.ReadLine();
+            Console.WriteLine("How old is the Customer?:");
+            searchCustomerAge = int.Parse(Console.ReadLine());
 
-            if (ApplArr[0].ToLower() == searchCustomerName.ToLower() && int.Parse(ApplArr[1]) == searchCustomerAge)
+            
+            foreach (string var in List<string> ApplArr)
+                {
+                tempApplArr = string var.split(',');
+
+            if (tempApplArr[0].ToLower() == searchCustomerName.ToLower() && int.Parse(ApplArr[1]) == searchCustomerAge)
             {
                 string display = $"name: {searchCustomerName}" +
                 "\n" + $"Age: {searchCustomerAge}" +
@@ -39,15 +50,16 @@ namespace Arcade_app
                 "\n " + "=======================================" +
                 "\n" + $"Your current bowling high score is: {ApplArr[5]}" +
                 "\n=======================================" +
-                "\n" + $"Your average high score is: {avgHS}";
+                "\n" + $"Your average high score is: {(ApplArr[2]+ ApplArr[5]}";
                 return display;
             }
             else
             {
                 return "Either the name and/or age in incorrect or the customer is not registered";
             }
+            }
         }
-        static string Reader(List<string> applicantDataArr, List<string> successful , List<string> failed )
+        static void Reader(List<string> applicantDataArr, List<string> successful , List<string> failed )
         {
             Console.WriteLine(DateTime.Now.ToString());
 
@@ -126,7 +138,7 @@ namespace Arcade_app
                     " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
                     "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
 
-                    tempList.Add(successOutput);
+                    successful.Add(successfulApp);
 
 
                 }
@@ -136,43 +148,37 @@ namespace Arcade_app
 
                 // failed counterpart
 
+                string failedApp = "name: " + name + " age: " + age.ToString() + " high score rank: " + highScoreRank.ToString() + "\n" +
+                    "Bowling high score: " + bowlingHS.ToString() + " Average score: " + avgScore.ToString() + "\n" +
+                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
+                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() +
+                    " Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
+                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
+                failed.Add(failedApp)
 
-
-                // if you want to search for an applicant
-
-                int searchCustomerAge;
-                string searchCustomerName;
-                Console.WriteLine("What is the customer's name?:");
-                searchCustomerName = Console.ReadLine();
-                Console.WriteLine("How old is the Customer?:");
-                searchCustomerAge = int.Parse(Console.ReadLine());
-                Console.Write(ScoreCheck(searchCustomerAge, searchCustomerName, tempArray, avgScore));
 
             }
 
 
-            return "the text file is empty";
+           
 
 
         }
 
 
 
-        static void ApplicantDataEntry(string filepath)                             //This is the Method of etering the new applicant data into a .txt file
+        static void ApplicantDataEntry(string filepath, list<string> applicantDataEtry)                             //This is the Method of etering the new applicant data into a .txt file
         {
             string applicantName, applicantAge, applicantHighScoreRank, applicantStartDate, applicantPizzaTotal,
                 applicantBowlHighScore, applicantEmploy, applicantSlushPuppyPref, applicantSlushPuppyTotal; 
 
             string applicantData;
             List<string> applicantDataArr = new List<string>();                     //list to hold the data as its being entered
-            List<string> applicantDataArrEtry = new List<string>();                 //list to hold all the data from the txt file and the properly formatted new data
+            
             bool formatCorrect=false;
             bool enter = true;
 
-            foreach (string line in File.ReadAllLines(filepath))
-            {
-                applicantDataArrEtry.Add(line);                                        //to get all data already in the txt file into the applicantDataArrEtry list
-            }
+           
                                                                                           //a do while loop to contain the user so that if they want to repeat the data
                                                                                         //entry then they can with a simple bool loop
             do
@@ -284,12 +290,13 @@ namespace Arcade_app
                 string choiceUpper = choice.ToUpper();
                 if (choiceUpper == "N")
                     enter = false;
-                File.WriteAllLines(filepath, applicantDataArrEtry);
+                
                 Console.Clear();
 
             } while (enter == true);
-            
+            File.WriteAllLines(filepath, applicantDataArrEtry);
         }
+        
 
         // Menu creation
         enum Menu
@@ -297,6 +304,13 @@ namespace Arcade_app
             Capture_details = 1,
             View_token_eligibility,
             Exit_the_program
+        }
+        enum subMenu
+        {
+            View_loyal_customers_that_are_eligable_for_credit = 1,
+            View_loyal_customers_that_are_ineligabe_for_credit,
+            View_the_score_of_a_customer,
+            Return_to_menu
         }
 
         static void Main(string[] args)
@@ -316,8 +330,16 @@ namespace Arcade_app
             }
 
             filePath = string.Join("\\", filepatharr);
+            List<string> applicantDataArr = new List<string>();
+
+            foreach (string line in File.ReadAllLines(filePath))
+            {
+                applicantDataArr.Add(line);                                        //to get all data already in the txt file into the applicantDataArrEtry list
+            }
+
             List<string>successful = new List<string>();
             List<string>failed = new List<string>();
+            Reader(applicantDataArr);
             // Perpetual loop to keep program running unless choosing exit
             while (true)
             {
@@ -351,9 +373,42 @@ namespace Arcade_app
                 switch (optionChosen)
                 {
                     case Menu.Capture_details:
-                        ApplicantDataEntry(filePath);
+                        ApplicantDataEntry(filePath, applicantDataArr);
                         break;
                     case Menu.View_token_eligibility:
+                        Console.WriteLine("\nView token eligibility")
+
+                         foreach (subMenu option in Enum.GetValues(typeof(subMenu)))
+                        {
+                            Console.WriteLine($"{(int)option}. {option.ToString().Replace('_', ' ')}");
+                        }
+
+                        // Making sure user input is valid
+                        if (!Enum.TryParse(Console.ReadLine(), out subMenu subMenuOptionChosen) || !Enum.IsDefined(typeof(subMenu), subMenuOptionChosen))
+                        {
+                            Console.WriteLine("Invalid option, try again");
+                            continue;
+                        switch (subMenuOptionChosen)
+                            {
+                                case subMenu.View_loyal_customers_that_are_eligable_for_credit:
+                                    foreach (string line in successful)
+                                    {
+                                        Console.WriteLine(line);
+                                    }
+                                    continue;
+                                case subMenu.View_loyal_customers_that_are_ineligabe_for_credit:
+                                    foreach (string line in failed)
+                                    {
+                                        Console.WriteLine(line)
+                                    }
+                                    continue;
+                                case subMenu.View_the_score_of_a_customer:
+                                    ScoreCheck(applicantDataArr);
+                                    continue;
+                                case subMenu.Return_to_menu
+                                    break;
+                            }
+                        }
                         break;
                 }
             }

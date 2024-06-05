@@ -21,7 +21,7 @@ namespace Arcade_app
             int monthNow = int.Parse(nowArray[1]);
             int monthStart = int.Parse(joinArray[0]);
             int yearNow = int.Parse(nowArray[0]);
-            int yearStart = int.Parse(joinArray[3]);
+            int yearStart = int.Parse(joinArray[2]);
             int yearDiff = yearNow - yearStart;
             int monthDiff = monthStart - monthStart;
             int yearToMonth = yearDiff * 12;

@@ -210,7 +210,7 @@ namespace Arcade_app
                 }
 
                 formatCorrect = false;
-                Console.WriteLine("\nWhat is the applicant's start date?: mm/dd/yyyy");
+                Console.WriteLine("\nWhat is the applicant's start date?: mm/dd/yyyy");     
                 while (formatCorrect == false)
                 {
                     applicantStartDate = Console.ReadLine();
@@ -234,11 +234,13 @@ namespace Arcade_app
                     {
                         employ = "false";
                         applicantDataArr.Add(employ);
+                        formatCorrect = true;
                     }
                     else if (applicantEmploy == "Y") 
                     {
                         employ = "true";
                         applicantDataArr.Add(employ);
+                        formatCorrect = true;
                     }
                     else
                     {
@@ -322,12 +324,12 @@ namespace Arcade_app
 
         static void Main(string[] args)
         {
-            string filePath = Directory.GetCurrentDirectory();
-            List<string> filepatharr = new List<string>(filePath.Split('\\'));
+            string filePath = Directory.GetCurrentDirectory();                          //gets the directory of the running file and puts it into filepath as a string
+            List<string> filepatharr = new List<string>(filePath.Split('\\'));          //makes filepath into a list since the directory could be any length
 
-            for (int i = 0; i < filepatharr.Count;i++)
+            for (int i = 0; i < filepatharr.Count;i++)                                  //runs through the filepath array to edit the cells 
             {
-                if (filepatharr[i] == ("Arcade_app"))
+                if (filepatharr[i] == ("Arcade_app"))                                   //checks 
                 {
                     filepatharr[i + 1] = "ApplicantData.txt";
                     filepatharr.Remove("Debug");
@@ -353,10 +355,8 @@ namespace Arcade_app
             // Perpetual loop to keep program running unless choosing exit
             while (true)
             {
-                Console.WriteLine("=======================================================================================================================");
-
                 // Choosing from menu
-                Console.WriteLine("\nMenu:");
+                Console.WriteLine("Main menu\nChoose a option:\n");
                 foreach (Menu option in Enum.GetValues(typeof(Menu)))
                 {
                     Console.WriteLine($"{(int)option}. {option.ToString().Replace('_', ' ')}");
@@ -372,12 +372,11 @@ namespace Arcade_app
                 //Exiting program
                 if (optionChosen == Menu.Exit_the_program)
                 {
+                    Console.Clear();
                     Console.WriteLine("Thank you, have a nice day");
                     System.Threading.Thread.Sleep(2000);
                     Environment.Exit(0);
                 }
-
-                Console.WriteLine("=======================================================================================================================");
 
                 // Switch case to use the menu option chosen
                 switch (optionChosen)
@@ -390,13 +389,14 @@ namespace Arcade_app
                         }
                         break;
                     case Menu.View_token_eligibility:
-                        Console.WriteLine("\nView token eligibility");
+                        Console.Clear();
 
                         bool subMenuBool = true;
 
                         while (subMenuBool == true)
                         {
 
+                            Console.WriteLine("Menu\nChoose a option:\n");
                             foreach (SubMenu option in Enum.GetValues(typeof(SubMenu)))
                             {
                                 Console.WriteLine($"{(int)option}. {option.ToString().Replace('_', ' ')}");
@@ -411,6 +411,7 @@ namespace Arcade_app
                             switch (subMenuOptionChosen)
                             {
                                 case SubMenu.View_loyal_customers_that_are_eligable_for_credit:
+                                    Console.Clear();
                                     foreach (string line in successful)
                                     {
                                         if(line == null)
@@ -421,18 +422,22 @@ namespace Arcade_app
                                     }
                                     continue;
                                 case SubMenu.View_loyal_customers_that_are_ineligabe_for_credit:
+                                    Console.Clear();
                                     foreach (string line in failed)
                                     {
                                         Console.WriteLine(line);
                                     }
                                     continue;
                                 case SubMenu.View_the_score_of_a_customer:
+                                    Console.Clear();
                                     Console.WriteLine(ScoreCheck(applicantDataArr));
                                     continue;
                                 case SubMenu.Return_to_main_menu:
+                                    Console.Clear();
                                     subMenuBool = false;
                                     break;
                                 case SubMenu.Exit_the_program:
+                                    Console.Clear();
                                     Console.WriteLine("Thank you, have a nice day");
                                     System.Threading.Thread.Sleep(2000);
                                     Environment.Exit(0);

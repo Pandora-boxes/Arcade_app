@@ -4,25 +4,179 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
+
+//Fourie Jooste       (602075)
+//Pandora Greyling   (602369)
+//Matthew Bisset      (602166)
 
 namespace Arcade_app
 {
 
     internal class Program
     {
-        static List<string> ApplicantDataEntry(string filepath, List<string> applicantDataArrEtry)                             //This is the Method of etering the new applicant data into a .txt file
+
+        static int MonthCalc(string startdate, DateTime now)          // calculating the total monthes      
+        {
+            string tempstringNow = DateTime.Now.ToString();
+            string[] nowArray = tempstringNow.Split('/', ' ');
+            string tempstringJoin = startdate;
+            string[] joinArray = tempstringJoin.Split('/');
+            int monthNow = int.Parse(nowArray[1]);
+            int monthStart = int.Parse(joinArray[0]);
+            int yearNow = int.Parse(nowArray[0]);
+            int yearStart = int.Parse(joinArray[2]);
+            int yearDiff = yearNow - yearStart;
+            int monthDiff = monthStart - monthStart;
+            int yearToMonth = yearDiff * 12;
+            int totalMonths = yearToMonth + monthDiff;
+            return totalMonths;
+        }
+        static string ScoreCheck( List<string> ApplArr)     // Searching for a specific person
+        {
+            int searchCustomerAge;
+            string searchCustomerName;
+            Console.WriteLine("What is the customer's name?:");
+            searchCustomerName = Console.ReadLine();
+            Console.WriteLine("How old is the Customer?:");
+            searchCustomerAge = int.Parse(Console.ReadLine());
+            List<string> tempApplArr = new List<string>();
+
+
+
+            foreach (string var in ApplArr)
+            {
+                List<string> array = new List<string>(var.Split(','));
+
+                if (array[0].ToLower() == searchCustomerName.ToLower() && int.Parse(array[1]) == searchCustomerAge)
+                {
+                    string display = $"name: {searchCustomerName}" +
+                    "\n" + $"Age: {searchCustomerAge}" +
+                    "\n" + $"Your current high score rank: {array[2]}" +
+                    "\n " + "=======================================" +
+                    "\n" + $"Your current bowling high score is: {array[5]}" +
+                    "\n=======================================" +
+                    "\n" + $"Your average high score is: {(array[2]+ array[5])}";
+                    
+                    return display;
+                    
+                }             
+                
+            }
+            return "Either the name and/or age in incorrect or the customer is not registered";
+        }
+        static void Reader(List<string> applicantDataArr, List<string> successful , List<string> failed )
+
+            //method for all the condition checks
+        {
+            Console.Clear();
+
+            string name;
+            int age;
+            int highScoreRank;
+            string startDateAsLoyalCustomer;
+            int numOfPizzasSinceFirstVisit;
+            int bowlingHS;
+            bool isEmployed;
+            string favoriteSlushieFlavour;
+            int numOfSlushiesSinceFirstVisit;
+            int avgScore;
+            
+            List<string> tempList = new List<string>();
+            
+            string successOutput = "Customers that qualify for Credit:";
+            DateTime today = DateTime.Now;
+
+            foreach (string line in applicantDataArr)
+            {
+
+                tempList = new List<string>(line.Split(','));
+
+                name = tempList[0];
+                age = int.Parse(tempList[1]);
+                highScoreRank = int.Parse(tempList[2]);
+                startDateAsLoyalCustomer = tempList[3];
+                isEmployed = bool.Parse(tempList[4]);
+                favoriteSlushieFlavour = tempList[5];
+                numOfSlushiesSinceFirstVisit = int.Parse(tempList[6]);
+                bowlingHS = int.Parse(tempList[7]);
+                numOfPizzasSinceFirstVisit = int.Parse(tempList[8]);
+                bool applicationApproved = true;
+
+                avgScore = (bowlingHS + highScoreRank) / 2;
+                int loyalCustomerMonths = MonthCalc(startDateAsLoyalCustomer, today);
+                string successfulApp = "name: " + name + "\n" + "age: " + age.ToString() + "\n" +  " high score rank: " +
+                    highScoreRank.ToString() + "\n" +"Bowling high score: " + bowlingHS.ToString() + "\n" + "Average score: " + avgScore.ToString() + "\n" +
+                    "Start date as loyal customer: " + startDateAsLoyalCustomer + "\n" +
+                    "Number of pizzas since first visit: " + numOfPizzasSinceFirstVisit.ToString() + "\n" +
+                    "Number of Slush-puppys since first visit: " + numOfSlushiesSinceFirstVisit.ToString() + "\n" +
+                    "Preffered flavour Sluch-puppy: " + favoriteSlushieFlavour + "\n\n\n";
+
+
+
+                //condition cheacks
+                if (isEmployed == false)
+                {
+                    applicationApproved = false;
+                }
+                if (applicationApproved == true && loyalCustomerMonths < 24)
+                {
+                    applicationApproved = false;
+                }
+                if (applicationApproved == true)
+                {
+                    if (highScoreRank <= 2000 || bowlingHS <= 1500 || avgScore <= 1200)
+                    {
+                        applicationApproved = false;
+                    }
+                }
+                if (applicationApproved == true && numOfPizzasSinceFirstVisit / loyalCustomerMonths < 3)
+                {
+                    applicationApproved = false;
+                }
+                if (applicationApproved == true && numOfSlushiesSinceFirstVisit / loyalCustomerMonths < 4)
+                {
+                    applicationApproved = false;
+                }
+                if (applicationApproved == true && favoriteSlushieFlavour == "Gooey Gulp Galore")
+                {
+                    applicationApproved = false;
+                }
+                if (applicationApproved == true)
+                {
+                    successful.Add(successfulApp);
+                }
+                else
+                {
+                    failed.Add(successfulApp);
+                }
+            }
+
+
+           
+
+
+        }
+
+
+
+        static void ApplicantDataEntry(string filepath, List<string> applicantDataEtry)               //This is the Method of etering the new applicant data into a .txt file
         {
             string applicantName, applicantAge, applicantHighScoreRank, applicantStartDate, applicantPizzaTotal,
                 applicantBowlHighScore, applicantEmploy, applicantSlushPuppyPref, applicantSlushPuppyTotal; 
 
             string applicantData;
             List<string> applicantDataArr = new List<string>();                     //list to hold the data as its being entered
+            
             bool formatCorrect=false;
             bool enter = true;
+
+           
                                                                                           //a do while loop to contain the user so that if they want to repeat the data
                                                                                         //entry then they can with a simple bool loop
             do
             {
+                Console.Clear();
                 applicantDataArr.Clear();
                 Console.WriteLine("What is the applicant's name?");
                 applicantName = Console.ReadLine();
@@ -55,7 +209,7 @@ namespace Arcade_app
                 }
 
                 formatCorrect = false;
-                Console.WriteLine("\nWhat is the applicant's start date?: mm/dd/yyyy");
+                Console.WriteLine("\nWhat is the applicant's start date?: mm/dd/yyyy");     
                 while (formatCorrect == false)
                 {
                     applicantStartDate = Console.ReadLine();
@@ -69,15 +223,29 @@ namespace Arcade_app
                 formatCorrect = false;
                 Console.WriteLine("\nWhat is the applicant's employment status?" +
                     " If the applicant is under 18 then use the parents employment status." +
-                    "\nWrite true for employed or false for unemployed");
+                    "\nY/N");
+                string employ;
                 while (formatCorrect == false)
                 {
                     applicantEmploy = Console.ReadLine();
-                    formatCorrect = bool.TryParse(applicantEmploy, out bool Employ);
-                    if (formatCorrect == false)
-                        Console.WriteLine("\nThe format is wrong you need to write true or false.");
-                    else if (formatCorrect == true)
-                        applicantDataArr.Add(applicantEmploy);
+                    applicantEmploy = applicantEmploy.ToUpper();
+                    if (applicantEmploy == "N")
+                    {
+                        employ = "false";
+                        applicantDataArr.Add(employ);
+                        formatCorrect = true;
+                    }
+                    else if (applicantEmploy == "Y") 
+                    {
+                        employ = "true";
+                        applicantDataArr.Add(employ);
+                        formatCorrect = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The format is wrong you need to write Y or N\nTry again:");
+                    }
+                
                 }
 
                 Console.WriteLine("\nWhat is the applicant's favorite slush-puppy flavor?");
@@ -122,24 +290,20 @@ namespace Arcade_app
               
 
                 applicantData = string.Join(",", applicantDataArr);                                 //This makes the Entered data into a combined string with a "," seperating them
-               
-                applicantDataArrEtry.Add(applicantData);                                            //adds the combined string into the next entry of the list to be written into the txt file
-                Console.WriteLine("\nDo you still want to add anymore applicants? Y for yes and N for no");
+
+                applicantDataEtry.Add(applicantData);                                            //adds the combined string into the next entry of the list to be written into the txt file
+                Console.WriteLine("\nDo you still want to add anymore applicants? (Y/N)");
                 string choice = Console.ReadLine();
                 string choiceUpper = choice.ToUpper();
                 if (choiceUpper == "N")
                     enter = false;
-                Console.Clear();
+                
+                
 
             } while (enter == true);
-
-            foreach (string line in applicantDataArrEtry)
-            {
-                Console.WriteLine(line);
-            }
-            File.WriteAllLines(filepath, applicantDataArrEtry);
-            return applicantDataArrEtry;
+            File.WriteAllLines(filepath, applicantDataEtry);                                    //writes the applicants in the array and recently added into the file
         }
+        
 
         // Menu creation
         enum Menu
@@ -148,39 +312,50 @@ namespace Arcade_app
             View_token_eligibility,
             Exit_the_program
         }
+        enum SubMenu
+        {
+            View_loyal_customers_that_are_eligable_for_credit = 1,
+            View_loyal_customers_that_are_ineligabe_for_credit,
+            View_the_score_of_a_customer,
+            Return_to_main_menu,
+            Exit_the_program
+        }
 
         static void Main(string[] args)
         {
-            string filePath = Directory.GetCurrentDirectory();
-            List<string> filepatharr = new List<string>(filePath.Split('\\'));
+            string filePath = Directory.GetCurrentDirectory();                          //gets the directory of the running file and puts it into filepath as a string
+            List<string> filepatharr = new List<string>(filePath.Split('\\'));          //makes filepath into a list since the directory could be any length
 
-            for (int i = 0; i < filepatharr.Count;i++)
-            {
-                if (filepatharr[i] == ("Arcade_app"))
+            for (int i = 0; i < filepatharr.Count;i++)                                  //runs through the filepath array to edit the cells
+            {                                                                           //to make it properly point to the file
+                if (filepatharr[i] == "Arcade_app")                                     //checks for the start of the Arcade_App file
                 {
-                    filepatharr[i + 1] = "ApplicantData.txt";
-                    filepatharr.Remove("Debug");
+                    filepatharr[i + 1] = "ApplicantData.txt";                           //changes the next cell after the start to the file name
+                    filepatharr.Remove("Debug");                                        //removes the debug from the 
                     break;
                 }
 
             }
 
-            filePath = string.Join("\\", filepatharr);
+            filePath = string.Join("\\", filepatharr);                                  //joins the file path array back into a string amking it accessable by functions
+            List<string> applicantDataArr = new List<string>();                         //array for storing the values in the txt file
 
-            List<string> applicantDataArr = new List<string>();                 //list to hold all the data from the txt file and the properly formatted new data
-            foreach (string line in File.ReadAllLines(filePath))
+            foreach (string line in File.ReadAllLines(filePath))                        //runs through each line of the array and puts it into a array
             {
-                Console.WriteLine(line);
-                applicantDataArr.Add(line);                                        //to get all data already in the txt file into the applicantDataArrEtry list
+                applicantDataArr.Add(line);                                             //to get all data already in the txt file into the applicantDataArrEtry list
             }
 
+            List<string>successful = new List<string>();
+            List<string>failed = new List<string>();
+            if (applicantDataArr.Count > 0)
+            {
+                Reader(applicantDataArr, successful, failed);
+            }
             // Perpetual loop to keep program running unless choosing exit
             while (true)
             {
-                Console.WriteLine("=======================================================================================================================");
-
                 // Choosing from menu
-                Console.WriteLine("\nMenu:");
+                Console.WriteLine("Main menu\nChoose a option:\n");
                 foreach (Menu option in Enum.GetValues(typeof(Menu)))
                 {
                     Console.WriteLine($"{(int)option}. {option.ToString().Replace('_', ' ')}");
@@ -196,20 +371,91 @@ namespace Arcade_app
                 //Exiting program
                 if (optionChosen == Menu.Exit_the_program)
                 {
-                    Console.WriteLine("Thank you, have a nice day");
+                    Console.Clear();
+                    Console.WriteLine("Thank you, have a nice day\n\n");
+                    Console.WriteLine(@"
+       /\_/\        (crust)
+     =( ^ . ^ )=        (cheese) 
+      /  =  =  \        (toppings)
+     /  / \ \ \  \  (crust)    
+    /_/   \_/   \_\ 
+");
                     System.Threading.Thread.Sleep(2000);
                     Environment.Exit(0);
                 }
-
-                Console.WriteLine("=======================================================================================================================");
 
                 // Switch case to use the menu option chosen
                 switch (optionChosen)
                 {
                     case Menu.Capture_details:
-                        applicantDataArr = ApplicantDataEntry(filePath, applicantDataArr);
+                        ApplicantDataEntry(filePath, applicantDataArr);
+                        if (applicantDataArr.Count > 0)
+                        {
+                            Reader(applicantDataArr, successful, failed);
+                        }
                         break;
                     case Menu.View_token_eligibility:
+                        Console.Clear();
+
+                        bool subMenuBool = true;
+
+                        while (subMenuBool == true)
+                        {
+                            //Displaying Sub Menu
+                            Console.WriteLine("Menu\nChoose a option:\n");
+                            foreach (SubMenu option in Enum.GetValues(typeof(SubMenu)))
+                            {
+                                Console.WriteLine($"{(int)option}. {option.ToString().Replace('_', ' ')}");
+                            }
+
+                            // Making sure user input is valid
+                            if (!Enum.TryParse(Console.ReadLine(), out SubMenu subMenuOptionChosen) || !Enum.IsDefined(typeof(SubMenu), subMenuOptionChosen))
+                            {
+                                Console.WriteLine("Invalid option, try again");
+                                continue;
+                            }
+
+                            //Switch for sub menu
+                            switch (subMenuOptionChosen)
+                            {
+                                case SubMenu.View_loyal_customers_that_are_eligable_for_credit:
+                                    Console.Clear();
+                                    foreach (string line in successful)
+                                    {
+                                        Console.WriteLine(line);
+                                    }
+                                    continue;
+                                case SubMenu.View_loyal_customers_that_are_ineligabe_for_credit:
+                                    Console.Clear();
+                                    foreach (string line in failed)
+                                    {
+                                        Console.WriteLine(line);
+                                    }
+                                    continue;
+                                case SubMenu.View_the_score_of_a_customer:
+                                    Console.Clear();
+                                    Console.WriteLine(ScoreCheck(applicantDataArr));
+                                    continue;
+                                case SubMenu.Return_to_main_menu:
+                                    Console.Clear();
+                                    subMenuBool = false;
+                                    break;
+                                case SubMenu.Exit_the_program:
+                                    Console.Clear();
+                                    Console.WriteLine("Thank you, have a nice day\n\n");
+                                    Console.WriteLine(@"
+       /\_/\        (crust)
+     =( ^ . ^ )=        (cheese) 
+      /  =  =  \        (toppings)
+     /  / \ \ \  \  (crust)    
+    /_/   \_/   \_\ 
+");
+                                    System.Threading.Thread.Sleep(2000);
+                                    Environment.Exit(0);
+                                    break;
+                            }
+                         
+                        }
                         break;
                 }
             }

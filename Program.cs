@@ -364,7 +364,8 @@ namespace Arcade_app
                 // Making sure user input is valid
                 if (!Enum.TryParse(Console.ReadLine(), out Menu optionChosen) || !Enum.IsDefined(typeof(Menu), optionChosen))
                 {
-                    Console.WriteLine("Invalid option, try again");
+                    Console.Clear();
+                    Console.WriteLine("Invalid option, try again\n=========================\n");
                     continue;
                 }
 
@@ -411,7 +412,8 @@ namespace Arcade_app
                             // Making sure user input is valid
                             if (!Enum.TryParse(Console.ReadLine(), out SubMenu subMenuOptionChosen) || !Enum.IsDefined(typeof(SubMenu), subMenuOptionChosen))
                             {
-                                Console.WriteLine("Invalid option, try again");
+                                Console.Clear();
+                                Console.WriteLine("Invalid option, try again\n=========================\n");
                                 continue;
                             }
 

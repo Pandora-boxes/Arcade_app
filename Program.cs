@@ -371,8 +371,11 @@ namespace Arcade_app
 
         static void Main(string[] args)
         {
+            Welcome();
             string filePath = Directory.GetCurrentDirectory();                          //gets the directory of the running file and puts it into filepath as a string
             List<string> filepatharr = new List<string>(filePath.Split('\\'));          //makes filepath into a list since the directory could be any length
+
+            Console.Clear();
 
             for (int i = 0; i < filepatharr.Count;i++)                                  //runs through the filepath array to edit the cells
             {                                                                           //to make it properly point to the file
@@ -421,16 +424,7 @@ namespace Arcade_app
                 if (optionChosen == Menu.Exit_the_program)
                 {
                     Console.Clear();
-                    Console.WriteLine("Thank you, have a nice day\n\n");
-                    Console.WriteLine(@"
-       /\_/\        (crust)
-     =( ^ . ^ )=        (cheese) 
-      /  =  =  \        (toppings)
-     /  / \ \ \  \  (crust)    
-    /_/   \_/   \_\ 
-");
-                    System.Threading.Thread.Sleep(2000);
-                    Environment.Exit(0);
+                    ByeBye();
                 }
 
                 // Switch case to use the menu option chosen
@@ -492,16 +486,7 @@ namespace Arcade_app
                                     break;
                                 case SubMenu.Exit_the_program:
                                     Console.Clear();
-                                    Console.WriteLine("Thank you, have a nice day\n\n");
-                                    Console.WriteLine(@"
-       /\_/\        (crust)
-     =( ^ . ^ )=        (cheese) 
-      /  =  =  \        (toppings)
-     /  / \ \ \  \  (crust)    
-    /_/   \_/   \_\ 
-");
-                                    System.Threading.Thread.Sleep(2000);
-                                    Environment.Exit(0);
+                                    ByeBye();
                                     break;
                             }
                          
@@ -510,5 +495,145 @@ namespace Arcade_app
                 }
             }
         }
+
+        static void ByeBye ()
+        {
+            Console.WriteLine("Thank you, have a nice day\n\n");
+            Console.WriteLine(@"
+       /\__/\        (crust)
+     =( ^ . ^ )=         
+      /  =  =  \        
+     /  / \ \ \  \  (crust)    
+    /_/   \_/   \_\ 
+");
+
+            System.Threading.Thread.Sleep(700);
+            Console.Clear();
+
+            Console.WriteLine("Thank you, have a nice day\n\n");
+            Console.WriteLine(@"
+       /\__/\        (crust)
+     =( 0 . 0 )=        (cheese) 
+      /  =  =  \        
+     /  / \ \ \  \  (crust)    
+    /_/   \_/   \_\ 
+");
+            System.Threading.Thread.Sleep(350);
+            Console.Clear();
+
+            Console.WriteLine("Thank you, have a nice day\n\n");
+            Console.WriteLine(@"
+       /\__/\        (crust)
+     =( ^ . ^ )=        (cheese) 
+      /  =  =  \        (toppings)
+     /  / \ \ \  \  (crust)    
+    /_/   \_/   \_\ 
+");
+            System.Threading.Thread.Sleep(1000);
+            Environment.Exit(0);
+        }
+
+        static void Welcome()
+        {
+            Console.WriteLine(  @" /$$      /$$           /$$                                            " + "\r\n" +
+                                @"| $$  /$ | $$          | $$                                            " + "\r\n" +
+                                @"| $$ /$$$| $$  /$$$$$$ | $$  /$$$$$$$  /$$$$$$  /$$$$$$/$$$$   /$$$$$$ " + "\r\n" +
+                                @"| $$/$$ $$ $$ /$$__  $$| $$ /$$_____/ /$$__  $$| $$_  $$_  $$ /$$__  $$" + "\r\n" +
+                                @"| $$$$_  $$$$| $$$$$$$$| $$| $$      | $$  \ $$| $$ \|$$ \\$$| $$$$$$$$" + "\r\n" +
+                                @"| $$$/ \\ $$$| $$_____/| $$| $$      | $$   |$$| $$ | $$ | $$| $$_____/" + "\r\n" +
+                                @"| $$/   \\ $$|  $$$$$$$| $$| $$$$$$$|  $$$$$$$$| $$ | $$ | $$| $$$$$$$" + "\r\n" +
+                                @"|__/     \\_/ \\______/|_/ \\_______/ \\______/ |__/ |__/ |__/ \\_____/" + "\r\n");
+
+            System.Threading.Thread.Sleep (500);
+
+            Console.WriteLine(  @"    /$$              " + "\r\n" +
+                                @"   | $$              " + "\r\n" +
+                                @"  /$$$$$$    /$$$$$$ " + "\r\n" +
+                                @" |_  $$_/   /$$__  $$" + "\r\n" +
+                                @"   | $$    | $$  \ $$" + "\r\n" +
+                                @"   | $$ /$$| $$  | $$" + "\r\n" +
+                                @"   | $$$$/ |  $$$$$$/" + "\r\n" +
+                                @"    \___/   \______/" + "\r\n");
+
+            System.Threading.Thread.Sleep(500);
+
+            Console.WriteLine(  @" /$$$$$$$$ /$$                " + "\r\n" +
+                                @"|__  $$__/| $$                " + "\r\n" +
+                                @"   | $$   | $$$$$$$   /$$$$$$ " + "\r\n" + 
+                                @"   | $$   | $$__  $$ /$$__  $$" + "\r\n" +
+                                @"   | $$   | $$  \ $$| $$$$$$$$" + "\r\n" + 
+                                @"   | $$   | $$  | $$| $$_____/" + "\r\n" +
+                                @"   | $$   | $$  | $$|  $$$$$$$" + "\r\n" + 
+                                @"   |__/   |__/  |__/ \_______/" + "\r\n");
+            System.Threading.Thread.Sleep(600);
+
+            Console.Clear();
+
+            Console.WriteLine(  @" /$$$$$$$              /$$                                /$$$$$$  /$$ /$$                    " + "\r\n" +
+                                @"| $$__  $$            | $$                               /$$__  $$| $$|__/                    " + "\r\n" +
+                                @"| $$  \ $$  /$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$       | $$  \__/| $$ /$$  /$$$$$$$  /$$$$$$ " + "\r\n" +
+                                @"| $$$$$$$/ /$$__  $$|_  $$_/   /$$__  $$ /$$__  $$      |  $$$$$$ | $$| $$ /$$_____/ /$$__  $$" + "\r\n" +
+                                @"| $$__  $$| $$$$$$$$  | $$    | $$  \__/| $$  \ $$       \____  $$| $$| $$| $$      | $$$$$$$$" + "\r\n" +
+                                @"| $$  \ $$| $$_____/  | $$ /$$| $$      | $$  | $$       /$$  \ $$| $$| $$| $$      | $$_____/" + "\r\n" +
+                                @"| $$  | $$|  $$$$$$$  |  $$$$/| $$      |  $$$$$$/      |  $$$$$$/| $$| $$|  $$$$$$$|  $$$$$$$" + "\r\n" +
+                                @"|__/  |__/ \_______/   \___/  |__/       \______/        \______/ |__/|__/ \_______/ \_______/");
+
+            System.Threading.Thread.Sleep(1000);
+            Console.Clear();
+            System.Threading.Thread.Sleep(400);
+
+            Console.WriteLine(  @" /$$$$$$$              /$$                                /$$$$$$  /$$ /$$                    " + "\r\n" +
+                                @"| $$__  $$            | $$                               /$$__  $$| $$|__/                    " + "\r\n" +
+                                @"| $$  \ $$  /$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$       | $$  \__/| $$ /$$  /$$$$$$$  /$$$$$$ " + "\r\n" +
+                                @"| $$$$$$$/ /$$__  $$|_  $$_/   /$$__  $$ /$$__  $$      |  $$$$$$ | $$| $$ /$$_____/ /$$__  $$" + "\r\n" +
+                                @"| $$__  $$| $$$$$$$$  | $$    | $$  \__/| $$  \ $$       \____  $$| $$| $$| $$      | $$$$$$$$" + "\r\n" +
+                                @"| $$  \ $$| $$_____/  | $$ /$$| $$      | $$  | $$       /$$  \ $$| $$| $$| $$      | $$_____/" + "\r\n" +
+                                @"| $$  | $$|  $$$$$$$  |  $$$$/| $$      |  $$$$$$/      |  $$$$$$/| $$| $$|  $$$$$$$|  $$$$$$$" + "\r\n" +
+                                @"|__/  |__/ \_______/   \___/  |__/       \______/        \______/ |__/|__/ \_______/ \_______/");
+
+            System.Threading.Thread.Sleep(1000);
+            Console.Clear();
+            System.Threading.Thread.Sleep(400);
+
+            Console.WriteLine(  @" /$$$$$$$              /$$                                /$$$$$$  /$$ /$$                    " + "\r\n" +
+                                @"| $$__  $$            | $$                               /$$__  $$| $$|__/                    " + "\r\n" +
+                                @"| $$  \ $$  /$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$       | $$  \__/| $$ /$$  /$$$$$$$  /$$$$$$ " + "\r\n" +
+                                @"| $$$$$$$/ /$$__  $$|_  $$_/   /$$__  $$ /$$__  $$      |  $$$$$$ | $$| $$ /$$_____/ /$$__  $$" + "\r\n" +
+                                @"| $$__  $$| $$$$$$$$  | $$    | $$  \__/| $$  \ $$       \____  $$| $$| $$| $$      | $$$$$$$$" + "\r\n" +
+                                @"| $$  \ $$| $$_____/  | $$ /$$| $$      | $$  | $$       /$$  \ $$| $$| $$| $$      | $$_____/" + "\r\n" +
+                                @"| $$  | $$|  $$$$$$$  |  $$$$/| $$      |  $$$$$$/      |  $$$$$$/| $$| $$|  $$$$$$$|  $$$$$$$" + "\r\n" +
+                                @"|__/  |__/ \_______/   \___/  |__/       \______/        \______/ |__/|__/ \_______/ \_______/");
+
+            System.Threading.Thread.Sleep(1000);
+
+            Console.WriteLine(  @" /$$                                     /$$   /$$              " + "\r\n" +
+                                @"| $$                                    | $$  | $$              " + "\r\n" +
+                                @"| $$        /$$$$$$  /$$   /$$  /$$$$$$ | $$ /$$$$$$   /$$   /$$" + "\r\n" +
+                                @"| $$       /$$__  $$| $$  | $$ |____  $$| $$|_  $$_/  | $$  | $$" + "\r\n" +
+                                @"| $$      | $$  \ $$| $$  | $$  /$$$$$$$| $$  | $$    | $$  | $$" + "\r\n" +
+                                @"| $$      | $$  | $$| $$  | $$ /$$__  $$| $$  | $$ /$$| $$  | $$" + "\r\n" +
+                                @"| $$$$$$$$|  $$$$$$/|  $$$$$$$|  $$$$$$$| $$  |  $$$$/|  $$$$$$$" + "\r\n" +
+                                @"|________/ \______/  \____  $$ \_______/|__/   \___/   \____  $$" + "\r\n" +
+                                @"                     /$$  | $$                         /$$  | $$" + "\r\n" +
+                                @"                    |  $$$$$$/                        |  $$$$$$/" + "\r\n" +
+                                @"                     \______/                          \______/ ");
+
+            System.Threading.Thread.Sleep(500);
+
+            Console.WriteLine(  @"  /$$$$$$                     " + "\r\n" +
+                                @" /$$__  $$                    " + "\r\n" +
+                                @"| $$  \ $$  /$$$$$$   /$$$$$$ " + "\r\n" +
+                                @"| $$$$$$$$ /$$__  $$ /$$__  $$" + "r\n" +
+                                @"| $$__  $$| $$  \ $$| $$  \ $$" + "\r\n" +
+                                @"| $$  | $$| $$  | $$| $$  | $$" + "\r\n" + 
+                                @"| $$  | $$| $$$$$$$/| $$$$$$$/" + "\r\n" +
+                                @"|__/  |__/| $$____/ | $$____/ " + "\r\n" + 
+                                @"          | $$      | $$      " + "\r\n" + 
+                                @"          | $$      | $$      " + "\r\n" + 
+                                @"          |__/      |__/      ");
+
+            System.Threading.Thread.Sleep(1000);
+        }
     }
 }
+ 

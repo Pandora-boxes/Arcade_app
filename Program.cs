@@ -365,6 +365,8 @@ namespace Arcade_app
             View_loyal_customers_that_are_eligable_for_credit = 1,
             View_loyal_customers_that_are_ineligabe_for_credit,
             View_the_score_of_a_customer,
+            View_average_pizzas_consumed,
+            View_long_term_loyalty_eligability,
             Return_to_main_menu,
             Exit_the_program
         }
@@ -479,6 +481,12 @@ namespace Arcade_app
                                 case SubMenu.View_the_score_of_a_customer:
                                     Console.Clear();
                                     Console.WriteLine(ScoreCheck(applicantDataArr));
+                                    continue;
+                                case SubMenu.View_average_pizzas_consumed:
+                                    Console.Clear();
+                                    continue;
+                                case SubMenu.View_long_term_loyalty_eligability:
+                                    Console.Clear();
                                     continue;
                                 case SubMenu.Return_to_main_menu:
                                     Console.Clear();

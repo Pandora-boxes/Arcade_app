@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
+using System.Security.Policy;
 
 //Fourie Jooste       (602075)
 //Pandora Greyling   (602369)
@@ -151,13 +152,60 @@ namespace Arcade_app
                     failed.Add(successfulApp);
                 }
             }
-
-
-           
-
-
         }
 
+        //Create a method that will calculate the average number of pizzas consumed per first visit.
+        //• Make sure the data has been formatted appropriately.
+        //• Your method should return only the average
+        static double AveragePizza(List<string> dataArray)
+        {
+            int total = 0;
+            foreach (string line in dataArray)                              //goes through each entry in the list to add the total of the pizzas consumed
+            { 
+                List<string> data = new List<string>(line.Split(','));
+                total += int.Parse(data[4]);
+            }
+            int average = total / dataArray.Count;                          //divides the total with the amount of entries in the array to get the avarage
+            return average;
+        }
+
+        //Create a method to check if the applicant qualifies for a long-term loyalty award
+        //If the applicant has been a loyal customer for 10 years, they receive an unlimited number of credits
+        static string LongLoyaltyCheck(List<string> dataArray,string name, string age)  //method that returns a string value of true, false, or invalid for long loyalty 
+        {
+            string unlimited = null;
+            string applicant = null;
+            
+
+            foreach (string line in dataArray)
+            {
+                if (line.Contains(age) && line.Contains(name))                              //checks the array for the certain applicant
+                {   
+                    applicant = line;
+                    break;
+                }
+            }
+            
+            if (applicant == null)
+            {
+                unlimited = "invalid";                  //it returns invalid if the user isn't found in the sustem
+                return unlimited;
+            }
+
+            List<string> data = new List<string>(applicant.Split(','));
+            string startdate = data[3];
+            int monthsTotal = MonthCalc(startdate,DateTime.Now);
+            if (monthsTotal >= 120) 
+            {
+                unlimited = "true";                     //it returns true if the candadite qualifies
+                return unlimited;
+            }
+            else
+            {
+                unlimited = "false";                    //it returns false if they aren't qualifying
+                return unlimited;
+            }            
+        }
 
 
         static void ApplicantDataEntry(string filepath, List<string> applicantDataEtry)               //This is the Method of etering the new applicant data into a .txt file

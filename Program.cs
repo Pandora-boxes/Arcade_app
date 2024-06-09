@@ -505,9 +505,19 @@ namespace Arcade_app
                                     continue;
                                 case SubMenu.View_average_pizzas_consumed:
                                     Console.Clear();
+
+                                    StartAnimation();
+                                    StopAnimation();
+
+
                                     continue;
                                 case SubMenu.View_long_term_loyalty_eligability:
                                     Console.Clear();
+
+                                    StartAnimation();
+                                    StopAnimation();
+
+
                                     continue;
                                 case SubMenu.Return_to_main_menu:
                                     Console.Clear();
@@ -550,7 +560,7 @@ namespace Arcade_app
 
         static void thinkingAnimation()
         {
-            string[] animationFrames = { ">", "=>", "==>", "===>", "====>", "=====>" };
+            string[] animationFrames = { ">", "=>", "==>", "===>", "====>", "=====>", "======>", "=======>" };
 
             Random randomLoadTimes = new Random();
 

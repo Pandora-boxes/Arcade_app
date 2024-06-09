@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
 using System.Security.Policy;
 
 //Fourie Jooste       (602075)
-//Pandora Greyling   (602369)
+//Pandora Greyling    (602369)
 //Matthew Bisset      (602166)
 
 namespace Arcade_app
@@ -369,6 +370,10 @@ namespace Arcade_app
             Exit_the_program
         }
 
+        private static bool stopAnimatioBool = false;
+
+        private static Thread animationThread;
+
         static void Main(string[] args)
         {
             Welcome();
@@ -431,6 +436,10 @@ namespace Arcade_app
                 switch (optionChosen)
                 {
                     case Menu.Capture_details:
+
+                        StartAnimation();
+                        StopAnimation();
+
                         ApplicantDataEntry(filePath, applicantDataArr);
                         if (applicantDataArr.Count > 0)
                         {
@@ -464,6 +473,10 @@ namespace Arcade_app
                             {
                                 case SubMenu.View_loyal_customers_that_are_eligable_for_credit:
                                     Console.Clear();
+
+                                    StartAnimation();
+                                    StopAnimation();
+
                                     foreach (string line in successful)
                                     {
                                         Console.WriteLine(line);
@@ -471,6 +484,10 @@ namespace Arcade_app
                                     continue;
                                 case SubMenu.View_loyal_customers_that_are_ineligabe_for_credit:
                                     Console.Clear();
+
+                                    StartAnimation();
+                                    StopAnimation();
+
                                     foreach (string line in failed)
                                     {
                                         Console.WriteLine(line);
@@ -478,6 +495,10 @@ namespace Arcade_app
                                     continue;
                                 case SubMenu.View_the_score_of_a_customer:
                                     Console.Clear();
+
+                                    StartAnimation();
+                                    StopAnimation();
+
                                     Console.WriteLine(ScoreCheck(applicantDataArr));
                                     continue;
                                 case SubMenu.Return_to_main_menu:
@@ -493,6 +514,47 @@ namespace Arcade_app
                         }
                         break;
                 }
+            }
+        }
+
+        static void StartAnimation()
+        {
+            if (animationThread != null && animationThread.IsAlive)
+            {
+                stopAnimatioBool = true;
+                animationThread.Join();
+            }
+
+            stopAnimatioBool = false;
+            animationThread = new Thread(thinkingAnimation);
+            animationThread.Start();
+        }
+
+        static void StopAnimation()
+        {
+            stopAnimatioBool = true;
+            if (animationThread != null)
+            {
+                animationThread.Join();
+                animationThread = null;
+            }
+        }
+
+        static void thinkingAnimation()
+        {
+            string[] animationFrames = { ">", "=>", "==>", "===>", "====>", "=====>" };
+
+            Random randomLoadTimes = new Random();
+
+            int randomFrameIndex = randomLoadTimes.Next(4, 11);
+            int animationFrameCounter = 0;
+
+
+            for (animationFrameCounter = 0; animationFrameCounter < randomFrameIndex; animationFrameCounter++)
+            {
+                Console.Write($"\r{animationFrames[animationFrameCounter % animationFrames.Length]}");
+                System.Threading.Thread.Sleep(100);
+                Console.Clear();
             }
         }
 

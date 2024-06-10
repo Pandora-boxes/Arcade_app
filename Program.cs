@@ -166,6 +166,10 @@ namespace Arcade_app
                 List<string> data = new List<string>(line.Split(','));
                 total += int.Parse(data[4]);
             }
+            if (dataArray.Count == 0 && total == 0)
+            {
+                return 0;
+            }
             int average = total / dataArray.Count;                          //divides the total with the amount of entries in the array to get the avarage
             return average;
         }
@@ -350,7 +354,9 @@ namespace Arcade_app
                 
 
             } while (enter == true);
+            StartAnimation();
             File.WriteAllLines(filepath, applicantDataEtry);                                    //writes the applicants in the array and recently added into the file
+            StopAnimation();
         }
         
 
@@ -439,14 +445,13 @@ namespace Arcade_app
                 {
                     case Menu.Capture_details:
 
-                        StartAnimation();
-                        StopAnimation();
-
+                        
                         ApplicantDataEntry(filePath, applicantDataArr);
                         if (applicantDataArr.Count > 0)
                         {
                             Reader(applicantDataArr, successful, failed);
                         }
+                        
                         break;
                     case Menu.View_token_eligibility:
                         Console.Clear();
@@ -505,19 +510,37 @@ namespace Arcade_app
                                     continue;
                                 case SubMenu.View_average_pizzas_consumed:
                                     Console.Clear();
-
                                     StartAnimation();
+                                    double avgPizza = Math.Round(AveragePizza(applicantDataArr),3);
                                     StopAnimation();
-
+                                    Console.WriteLine($"The average amount of pizzas is: {avgPizza}");
 
                                     continue;
                                 case SubMenu.View_long_term_loyalty_eligability:
                                     Console.Clear();
 
+                                    Console.WriteLine("What is the name of the appliciant?");
+                                    string name = Console.ReadLine();
+                                    Console.WriteLine("What is the age of the appliciant?");
+                                    string age = Console.ReadLine();
                                     StartAnimation();
+                                    string longLoyalty = LongLoyaltyCheck(applicantDataArr,name,age);
                                     StopAnimation();
-
-
+                                    if (longLoyalty == "true")
+                                    {
+                                        Console.WriteLine("This applicant is eligable for the Long Time Loyalty.");
+                                        continue;
+                                    }
+                                    else if (longLoyalty == "false")
+                                    {
+                                        Console.WriteLine("This applicant is not eligable for the Long Time Loyalty.");
+                                        continue;
+                                    }
+                                    else if(longLoyalty == "invalid")
+                                    {
+                                        Console.WriteLine("Either the name or age is wrong. Please try again.");
+                                        continue;
+                                    }
                                     continue;
                                 case SubMenu.Return_to_main_menu:
                                     Console.Clear();

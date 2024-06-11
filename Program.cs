@@ -421,6 +421,7 @@ namespace Arcade_app
         enum Menu
         {
             Capture_details = 1,
+            Update_details,
             View_token_eligibility,
             Exit_the_program
         }
@@ -510,6 +511,18 @@ namespace Arcade_app
                             Reader(applicantDataArr, successful, failed);
                         }
                         
+                        continue;
+                    case Menu.Update_details:
+                        StartAnimation();
+                        StopAnimation();
+
+                        Console.WriteLine("What is the previous name of the applicant?");
+                        string updateName = Console.ReadLine();
+
+                        Console.WriteLine( "What is the previous age of the applicant?");
+                        string updateAge = Console.ReadLine();
+
+                        Console.WriteLine(UpdateData(applicantDataArr,filePath,updateName, updateAge));
                         break;
                     case Menu.View_token_eligibility:
                         Console.Clear();

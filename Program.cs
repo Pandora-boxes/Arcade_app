@@ -72,7 +72,7 @@ namespace Arcade_app
         static void MaxMinAge(List<string> ApplArr)
         {
             int maxAge = 0;
-            int minAge = 0;
+            int minAge = 1000;
             int i = 0;
             foreach(string var in ApplArr)
             {
@@ -81,15 +81,15 @@ namespace Arcade_app
                 int ApplAge = int.Parse(tempArr[1]);
                 if(ApplAge > maxAge)
                 {
-                    ApplAge = maxAge;
+                    maxAge = ApplAge;
                 }
                 if(ApplAge < minAge)
                 {
                     minAge = ApplAge;
-                }
-                Console.WriteLine("The youngest Customer is: {0}", minAge);
-                Console.WriteLine("The oldest Customer is: {0}", maxAge);
+                }              
             }
+            Console.WriteLine("The youngest Customer is: {0}", minAge);
+            Console.WriteLine("The oldest Customer is: {0}", maxAge);
             if (i == 0)
             {
                 Console.WriteLine("The list of aplicants is empty please add users and dty again");
@@ -193,7 +193,7 @@ namespace Arcade_app
             foreach (string line in dataArray)                              //goes through each entry in the list to add the total of the pizzas consumed
             { 
                 List<string> data = new List<string>(line.Split(','));
-                total += int.Parse(data[4]);
+                total += int.Parse(data[8]);
             }
             if (dataArray.Count == 0 && total == 0)
             {

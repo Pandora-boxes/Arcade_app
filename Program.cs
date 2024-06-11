@@ -8,6 +8,7 @@ using System.IO;
 using System.Globalization;
 using System.Security.Policy;
 using System.Web;
+using System.CodeDom.Compiler;
 
 //Fourie Jooste       (602075)
 //Pandora Greyling    (602369)
@@ -68,6 +69,33 @@ namespace Arcade_app
             }
             return "Either the name and/or age in incorrect or the customer is not registered";
         }
+        static string MaxMinAge(List<string> ApplArr)
+        {
+            int maxAge = 0;
+            int minAge = 0;
+            int i = 0;
+            foreach(string var in ApplArr)
+            {
+                i++;
+                string[] tempArr = var.Split(',');
+                int ApplAge = int.Parse(tempArr[2]);
+                if(ApplAge > maxAge)
+                {
+                    ApplAge = maxAge;
+                }
+                if(ApplAge < minAge)
+                {
+                    minAge = ApplAge;
+                }
+                Console.WriteLine("The youngest Customer is: {0}", minAge);
+                Console.WriteLine("The oldest Customer is: {0}", maxAge);
+            }
+            if (i == 0)
+            {
+                Console.WriteLine("The list of aplicants is empty please add users and dty again");
+            }
+
+        } 
         static void Reader(List<string> applicantDataArr, List<string> successful , List<string> failed )
 
             //method for all the condition checks
@@ -403,6 +431,7 @@ namespace Arcade_app
             View_the_score_of_a_customer,
             View_average_pizzas_consumed,
             View_long_term_loyalty_eligability,
+            View_youngest_and_oldest_customer,
             Return_to_main_menu,
             Exit_the_program
         }
@@ -570,6 +599,10 @@ namespace Arcade_app
                                         Console.WriteLine("Either the name or age is wrong. Please try again.");
                                         continue;
                                     }
+                                    continue;
+                                case SubMenu.View_youngest_and_oldest_customer:
+                                    Console.Clear();
+                                    MaxMinAge(applicantDataArr);
                                     continue;
                                 case SubMenu.Return_to_main_menu:
                                     Console.Clear();

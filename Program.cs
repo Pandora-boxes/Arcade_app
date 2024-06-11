@@ -69,7 +69,7 @@ namespace Arcade_app
             }
             return "Either the name and/or age in incorrect or the customer is not registered";
         }
-        static string MaxMinAge(List<string> ApplArr)
+        static void MaxMinAge(List<string> ApplArr)
         {
             int maxAge = 0;
             int minAge = 0;
@@ -78,7 +78,7 @@ namespace Arcade_app
             {
                 i++;
                 string[] tempArr = var.Split(',');
-                int ApplAge = int.Parse(tempArr[2]);
+                int ApplAge = int.Parse(tempArr[1]);
                 if(ApplAge > maxAge)
                 {
                     ApplAge = maxAge;

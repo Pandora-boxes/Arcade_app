@@ -88,11 +88,14 @@ namespace Arcade_app
                     minAge = ApplAge;
                 }              
             }
-            Console.WriteLine("The youngest Customer is: {0}", minAge);
-            Console.WriteLine("The oldest Customer is: {0}", maxAge);
             if (i == 0)
             {
-                Console.WriteLine("The list of aplicants is empty please add users and dty again");
+                Console.WriteLine("The list of aplicants is empty please add users and try again");
+            }
+            else
+            {
+                Console.WriteLine("The youngest Customer is: {0}", minAge);
+                Console.WriteLine("The oldest Customer is: {0}", maxAge);
             }
 
         } 
